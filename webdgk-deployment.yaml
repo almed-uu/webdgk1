@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webdgk-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webdgk-app
+  template:
+    metadata:
+      labels:
+        app: webdgk-app
+    spec:
+      containers:
+      - name: webdgk-app
+        image: webdgk
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webdgk-app
+spec:
+  selector:
+    app: webdgk-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
