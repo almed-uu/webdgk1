@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webdgk-ingress
+  annotations:
+     cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: openshift-default
+  rules:
+  - host: example.com  # Replace with your desired hostname
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webdgk-app
+            port:
+              number: 80
